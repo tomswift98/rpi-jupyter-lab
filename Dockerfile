@@ -1,13 +1,13 @@
 # This file creates a container that runs a jupyter notebook server on Raspberry Pi
 #
-# Author: Dmitrii Gerasimenko
-# Date 28/07/2018
+# Author: Tom Swift
+# Date 12/09/
 #
 # Originally from: https://github.com/mkjiang/rpi-jupyter/blob/master/Dockerfile
 #
 
 FROM resin/raspberrypi3-python:3.6
-MAINTAINER Dmitry Gerasimenko <kiddima@gmail.com>
+MAINTAINER Tom Swift
 
 WORKDIR /root
 
@@ -46,11 +46,11 @@ RUN tar zxvf v${TINI_VERSION}.tar.gz \
 
 
 # Install usefull python packages for data scientists
-#RUN apt-get install -y \
-#        libhdf5-dev \
-#        liblapack-dev \
-#        gfortran
-#RUN pip3 install requests numpy scipy scikit-learn nltk pandas seaborn tables matplotlib ipywidgets
+RUN apt-get install -y \
+        libhdf5-dev \
+        liblapack-dev \
+        gfortran
+RUN pip3 install numpy scipy matplotlib
 
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
@@ -58,4 +58,3 @@ ENTRYPOINT ["/usr/bin/tini", "--"]
 EXPOSE 8888
 
 CMD ["jupyter", "lab", "--allow-root"]
-
